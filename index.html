@@ -40,7 +40,7 @@
                         </svg>
                     </div>
                     <ul tabindex="0"
-                        class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow text-white">
+                        class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow  bg-green-700 text-white">
                         <li><a>About</a></li>
                         <li> <a>Gallery</a></li>
                         <li><a>Plant a Tree</a></li>
@@ -57,19 +57,39 @@
                 </ul>
             </div>
             <div class="navbar-end">
-                <button class="btn bg-yellow-400 text-green-600 borde rounded-full mr-10">Plant a Tree</button>
+                <button class="btn bg-yellow-400 hover:bg-yellow-200 text-green-600 borde rounded-full mr-10">Plant a
+                    Tree</button>
             </div>
         </div>
     </header>
 
     <body>
 
+        <section class="flex flex-col-reverse md:flex-row bannee w-full justify-around bg-emerald-100 items-center">
+            <div class="ima">
+                <img src="assets/hero-leaf1.png" alt="">
+            </div>
+            <div class="text-center md:text-2xl mt-8">
+                <h1 class="text-3xl font-black text-black">Plant a Tree, Grow a Future</h1>
+                <p class="text-xs font-normal text-blue-950 mt-2">Join our mission to plant 1 million trees and make the
+                    Earth greener for future
+                    generations.</p>
+                <button class="btn bg-yellow-400 hover:bg-yellow-200 text-green-600 borde rounded-full px5 py3 mt-3">Get
+                    Involved</button>
+            </div>
+            <div class="img">
+                <img src="assets/hero-leaf2.png" alt="">
+            </div>
+
+        </section>
+
+
     </body>
 
     <footer>
 
     </footer>
-    <script src="controlar.js"></script>
+    <script src="controller.js"></script>
 </body>
 
 </html>
