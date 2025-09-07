@@ -1,3 +1,8 @@
  * {
      font-family: "Inter", sans-serif;
  }
+
+ .setColor {
+     background-color: rgb(2, 142, 2);
+     color: white;
+ }
