@@ -52,31 +52,6 @@ const allT = (id) => {
     // console.log(tr.innerText);
 }
 
-//Trees Info
-
-//get all plants
-
-/*
-category
-: 
-"Fruit Tree"
-description
-: 
-"A fast-growing tropical tree that produces delicious, juicy mangoes during summer. Its dense green canopy offers shade, while its sweet fruits are rich in vitamins and minerals."
-id
-: 
-1
-image
-: 
-"https://i.ibb.co.com/cSQdg7tf/mango-min.jpg"
-name
-: 
-"Mango Tree"
-price
-: 
-500 
-*/
-
 const allPlants = () => {
     const allUrl = "https://openapi.programming-hero.com/api/plants";
 
@@ -102,11 +77,12 @@ const displayAllPlants = (plants) => {
         <img class="w-full h-44 object-cover rounded-lg" src="${element.image}" alt="">
         <p>${element.name}</p>
         <p class="text-xs font-light">${element.description}</p>
-        <div class="flex justify-between gap-2 mt-4">
-        <p class="rounded-full py-2 px-4 bg-green-400 text-center text-green-800">${element.category}</p> 
+        <div class="flex justify-between mt-4">
+        <p class="rounded-full p-2 bg-green-400 text-center text-green-800 text-sm">${element.category}</p> 
         <p class="text-center"> ${element.price}</p> 
         </div>
-        <button class="w-full bg-green-700 hover:bg-green-400 text-white text-center place-items-end font-normal rounded-full py-3 px-5 mt-6">Add to Cart</button>
+        <button class="w-full bg-green-700 hover:bg-green-400 text-white text-center
+         place-items-end font-normal rounded-full py-3 px-5 mt-6"  onclick = "addCard('${element.name}',${element.price})" >Add to Cart</button>
         `
 
         parentTree.appendChild(childTree);
@@ -116,6 +92,43 @@ const displayAllPlants = (plants) => {
 //call all plants
 allPlants();
 
+//Your card
 
+const card = document.getElementById("card");
+let total = 0; // running total
 
+const addCard = (name, price) => {
+    // Create card item
+    const cardDiv = document.createElement("div");
+    cardDiv.classList.add("cardCss");
+    cardDiv.innerHTML = `
+        <div>
+            <p>${name}</p> 
+            <p>${price}</p>
+        </div>
+        <p class="removeBtn"><i class="fa-solid fa-xmark"></i></p>
+    `;
 
+    cardDiv.querySelector(".removeBtn").addEventListener("click", () => {
+        total = total - price;
+        updateTotal();
+        cardDiv.remove();
+    });
+
+    total = total + price;
+    updateTotal();
+    card.appendChild(cardDiv);
+};
+
+const pricePart = document.getElementById("addPrice");
+const totalPrice = document.createElement("div");
+totalPrice.classList.add("totalCss");
+totalPrice.innerHTML = `
+    <p>Total:</p>
+    <p id="totalValue">0</p>
+`;
+pricePart.appendChild(totalPrice);
+
+function updateTotal() {
+    document.getElementById("totalValue").innerText = total;
+}
