@@ -6,3 +6,11 @@
      background-color: rgb(2, 142, 2);
      color: white;
  }
+
+ .allTreeInfo {
+     padding: 1rem;
+     max-width: 21rem;
+     max-height: auto;
+     border-radius: 1rem;
+     background-color: white;
+ }
