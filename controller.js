@@ -1,6 +1,6 @@
 // console.log("Js file is connected");
 
-//categories Calling
+//categories get
 
 const loadCate = () => {
     const url = "https://openapi.programming-hero.com/api/categories";
@@ -43,15 +43,18 @@ const nameClick = (id) => {
     removeSelect();
     const tr = document.getElementById(`treeId${id}`);
     tr.classList.add("setColor");
+    getCategoriesTree(id);
     // console.log(tr.innerText);
 }
 const allT = (id) => {
     removeSelect();
     const tr = document.getElementById(id);
     tr.classList.add("setColor");
+    allPlants();
     // console.log(tr.innerText);
 }
 
+//Get all tree
 const allPlants = () => {
     const allUrl = "https://openapi.programming-hero.com/api/plants";
 
@@ -75,10 +78,10 @@ const displayAllPlants = (plants) => {
         childTree.innerHTML =
             `
         <img class="w-full h-44 object-cover rounded-lg" src="${element.image}" alt="">
-        <p>${element.name}</p>
-        <p class="text-xs font-light">${element.description}</p>
+        <p onclick="getModal(${element.id})">${element.name}</p>
+        <p onclick="getModal(${element.id})" class="text-xs font-light">${element.description}</p>
         <div class="flex justify-between mt-4">
-        <p class="rounded-full p-2 bg-green-400 text-center text-green-800 text-sm">${element.category}</p> 
+        <p onclick="getModal(${element.id})" class="rounded-full p-2 bg-green-400 text-center text-green-800 text-sm">${element.category}</p> 
         <p class="text-center"> ${element.price}</p> 
         </div>
         <button class="w-full bg-green-700 hover:bg-green-400 text-white text-center
@@ -88,6 +91,42 @@ const displayAllPlants = (plants) => {
         parentTree.appendChild(childTree);
     })
 }
+// Get tree by there Categories
+
+const getCategoriesTree = (id) => {
+    url = `https://openapi.programming-hero.com/api/category/${id}`
+    fetch(url)
+        .then(res => res.json())
+        .then(data => displayCateItem(data.plants));
+}
+
+const displayCateItem = (catePlant) => {
+    // console.log("hello to get categories");
+    // console.log(catePlant);
+    const parentTree = document.getElementById("treeInfo")
+    parentTree.innerHTML = "";
+    catePlant.forEach(element => {
+        // console.log(element);
+        const childTree = document.createElement("div");
+        childTree.classList.add("allTreeInfo")
+
+        childTree.innerHTML =
+            `
+        <img class="w-full h-44 object-cover rounded-lg" src="${element.image}" alt="">
+        <p onclick="getModal(${element.id})>${element.name}</p>
+        <p onclick="getModal(${element.id}) class="text-xs font-light">${element.description}</p>
+        <div class="flex justify-between mt-4">
+        <p onclick="getModal(${element.id}) class="rounded-full p-2 bg-green-400 text-center text-green-800 text-sm">${element.category}</p> 
+        <p class="text-center"> ${element.price}</p> 
+        </div>
+        <button class="w-full bg-green-700 hover:bg-green-400 text-white text-center
+         place-items-end font-normal rounded-full py-3 px-5 mt-6"  onclick = "addCard('${element.name}',${element.price})" >Add to Cart</button>
+        `
+
+        parentTree.appendChild(childTree);
+    })
+}
+
 
 //call all plants
 allPlants();
@@ -131,4 +170,33 @@ pricePart.appendChild(totalPrice);
 
 function updateTotal() {
     document.getElementById("totalValue").innerText = total;
+}
+
+//Modal information
+const findModalInfo = (id) => {
+    const url = `https://openapi.programming-hero.com/api/plant/${id}`
+    fetch(url)
+        .then(res => res.json())
+        .then(data => displayModalInfo(data.plants))
+}
+
+const displayModalInfo = (catePlant) => {
+
+    // console.log(catePlant)
+    const childTree = document.getElementById("setModelInfo");
+    childTree.innerHTML =
+        `
+        <img class="w-full h-52 object-cover rounded-lg" src="${catePlant.image}" alt="">
+        <p >${catePlant.name}</p>
+        <div class="flex justify-between mt-4">
+        <p class="rounded-full p-2 bg-green-400 text-center text-green-800 text-sm">${catePlant.category}</p> 
+        <p class="text-center"> ${catePlant.price}</p> 
+        </div>
+        <p class="text-xl font-light">${catePlant.description}</p>
+        `
+    document.getElementById("my_modal_5").showModal();
+}
+
+const getModal = (id) => {
+    findModalInfo(id);
 }
