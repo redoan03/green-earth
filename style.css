@@ -9,8 +9,10 @@
 
  .allTreeInfo {
      padding: 1rem;
-     max-width: 21rem;
-     max-height: auto;
+     width: 100%;
      border-radius: 1rem;
      background-color: white;
+     display: flex;
+     flex-direction: column;
+     justify-content: space-between;
  }
