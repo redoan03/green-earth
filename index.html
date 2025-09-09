@@ -57,7 +57,7 @@
                 </ul>
             </div>
             <div class="navbar-end">
-                <button class="btn bg-yellow-400 hover:bg-yellow-200 text-green-600 borde rounded-full mr-10">Plant a
+                <button class="btn bg-yellow-400 hover:bg-yellow-200 text-green-600  rounded-full mr-10">Plant a
                     Tree</button>
             </div>
         </div>
@@ -75,7 +75,7 @@
                 <p class="text-xs font-normal text-blue-950 mt-2">Join our mission to plant 1 million trees and make the
                     Earth greener for future
                     generations.</p>
-                <button class="btn bg-yellow-400 hover:bg-yellow-200 text-green-600 borde rounded-full px5 py3 mt-3">Get
+                <button class="btn bg-yellow-400 hover:bg-yellow-200 text-green-600  rounded-full px5 py3 mt-3">Get
                     Involved</button>
             </div>
             <div class="img">
@@ -87,6 +87,9 @@
 
         <section class="bg-emerald-50">
             <!-- Start Campaign part with api -->
+            <!-- Load api -->
+            <div id="load">
+            </div>
 
             <section class="p-10">
                 <h1 class="text-center text-black">Choose Your Trees</h1>
@@ -94,12 +97,14 @@
                 <section
                     class="flex-1 flex-row md:flex gap-4 justify-between max-w-screen-2xl mx-auto items-start mt-4">
                     <!-- Categories -->
-
-                    <div id="categories" class="grid grid-cols-4 gap-3 max-w-full md:flex flex-col ml-4">
+                    <div>
+                        <p>Categories</p>
+                        <div id="categories" class="grid grid-cols-3 gap-4 m-auto max-w-full md:flex flex-col ml-4">
+                        </div>
                     </div>
 
                     <!-- Tree details -->
-                    <div id="treeInfo" class="max-w-4xl gap-5 m-auto grid grid-cols-1 md:grid-cols-3 ml-8">
+                    <div id="treeInfo" class="max-w-4xl gap-5 grid grid-cols-1 md:grid-cols-3 ml-8">
                         <!-- <h1>Hello Bangladesh</h1> -->
                     </div>
 
@@ -182,11 +187,11 @@
                         <input class="bg-white w-full rounded-md p-3" type="text" placeholder="Your name">
                         <input class="bg-white w-full rounded-md p-3" type="text" placeholder="Your email address">
 
-                        <select class="bg-white w-full rounded-md p-3">
-                            <option disabled selected>Pick a number</option>
-                            <option>1 tree $6</option>
+                        <select id="option" class="bg-white w-full rounded-md p-3">
+                            <!-- <option disabled selected>Pick a number</option>
+                            <option>1 tree $5</option>
                             <option>5 trees $25</option>
-                            <option>10 trees $100</option>
+                            <option>10 trees $100</option> -->
                         </select>
 
                         <button
@@ -204,8 +209,7 @@
             <p>© 2025 Green Earth. All Rights Reserved.</p>
         </aside>
     </footer>
-    <script src=" controller.js">
-    </script>
+    <script src="controller.js"></script>
 </body>
 
 </html>

@@ -4,20 +4,16 @@
 
 const loadCate = () => {
     const url = "https://openapi.programming-hero.com/api/categories";
-    showLoader();
     fetch(url)
         .then(res => res.json())
-        .then(value => {
-            hideLoader()
-            displayCate(value.categories)
-        });
+        .then(value => displayCate(value.categories));
 }
 
 const displayCate = (data) => {
     // console.log(data);
     const cateParent = document.getElementById("categories");
     cateParent.innerHTML =
-        `  <p>Categories</p>
+        `
      <p id ="all" class="mt-1 allTree max-w-48 rounded-lg p-2 hover:bg-green-400" onclick =allT("all") >All tree</p>
     `;
     data.forEach(element => {
@@ -90,7 +86,7 @@ const displayAllPlants = (plants) => {
         <p onclick="getModal(${element.id})" class="text-xs font-light">${element.description}</p>
         <div class="flex justify-between mt-4">
         <p onclick="getModal(${element.id})" class="rounded-full p-2 bg-green-400 text-center text-green-800 text-sm">${element.category}</p> 
-        <p class="text-center"> ${element.price}</p> 
+        <p class="text-center"><i class="fa-solid fa-bangladeshi-taka-sign"></i> ${element.price}</p> 
         </div>
         <button class="w-full bg-green-700 hover:bg-green-400 text-white text-center
          place-items-end font-normal rounded-full py-3 px-5 mt-6"  onclick = "addCard('${element.name}',${element.price})" >Add to Cart</button>
@@ -99,6 +95,11 @@ const displayAllPlants = (plants) => {
         parentTree.appendChild(childTree);
     })
 }
+
+//call all plants
+
+allPlants();
+
 // Get tree by there Categories
 
 const getCategoriesTree = (id) => {
@@ -125,11 +126,11 @@ const displayCateItem = (catePlant) => {
         childTree.innerHTML =
             `
         <img class="w-full h-44 object-cover rounded-lg" src="${element.image}" alt="">
-        <p onclick="getModal(${element.id})>${element.name}</p>
-        <p onclick="getModal(${element.id}) class="text-xs font-light">${element.description}</p>
+        <p onclick="getModal(${element.id})">${element.name}</p>
+        <p onclick="getModal(${element.id})" class="text-xs font-light">${element.description}</p>
         <div class="flex justify-between mt-4">
-        <p onclick="getModal(${element.id}) class="rounded-full p-2 bg-green-400 text-center text-green-800 text-sm">${element.category}</p> 
-        <p class="text-center"> ${element.price}</p> 
+        <p onclick="getModal(${element.id})" class="rounded-full p-2 bg-green-400 text-center text-green-800 text-sm">${element.category}</p> 
+        <p class="text-center"> <i class="fa-solid fa-bangladeshi-taka-sign"></i> ${element.price}</p> 
         </div>
         <button class="w-full bg-green-700 hover:bg-green-400 text-white text-center
          place-items-end font-normal rounded-full py-3 px-5 mt-6"  onclick = "addCard('${element.name}',${element.price})" >Add to Cart</button>
@@ -138,10 +139,6 @@ const displayCateItem = (catePlant) => {
         parentTree.appendChild(childTree);
     })
 }
-
-
-//call all plants
-allPlants();
 
 //Your card
 
@@ -176,7 +173,7 @@ const totalPrice = document.createElement("div");
 totalPrice.classList.add("totalCss");
 totalPrice.innerHTML = `
     <p>Total:</p>
-    <p id="totalValue">0</p>
+    <p> <i class="fa-solid fa-bangladeshi-taka-sign"></i><span id="totalValue">0</span></p>
 `;
 pricePart.appendChild(totalPrice);
 
@@ -202,7 +199,7 @@ const displayModalInfo = (catePlant) => {
         <p >${catePlant.name}</p>
         <div class="flex justify-between mt-4">
         <p class="rounded-full p-2 bg-green-400 text-center text-green-800 text-sm">${catePlant.category}</p> 
-        <p class="text-center"> ${catePlant.price}</p> 
+        <p class="text-center"><i class="fa-solid fa-bangladeshi-taka-sign"></i> ${catePlant.price}</p> 
         </div>
         <p class="text-xl font-light">${catePlant.description}</p>
         `
@@ -215,7 +212,7 @@ const getModal = (id) => {
 
 //Make loading function
 function showLoader() {
-    const parentTree = document.getElementById("treeInfo");
+    const parentTree = document.getElementById("load");
     parentTree.innerHTML = `
         <div class="col-span-3 text-center">
         <span class="loading loading-dots loading-sm"></span>
@@ -225,6 +222,16 @@ function showLoader() {
 }
 
 function hideLoader() {
-    const parentTree = document.getElementById("treeInfo");
+    const parentTree = document.getElementById("load");
     parentTree.innerHTML = "";
 }
+
+
+//Option making
+const option = document.getElementById("option");
+option.innerHTML =
+    `<option disabled selected>Pick a number</option>
+    <option>None</option>
+     <option>1 tree <i class="fa-solid fa-bangladeshi-taka-sign"></i>5 BDT.</option>
+     <option>5 trees <i class="fa-solid fa-bangladeshi-taka-sign"></i>25 BDT.</option>
+     <option>10 trees <i class="fa-solid fa-bangladeshi-taka-sign"></i>100 BDT.</option>`;
