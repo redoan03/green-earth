@@ -4,9 +4,13 @@
 
 const loadCate = () => {
     const url = "https://openapi.programming-hero.com/api/categories";
+    showLoader();
     fetch(url)
         .then(res => res.json())
-        .then(value => displayCate(value.categories));
+        .then(value => {
+            hideLoader()
+            displayCate(value.categories)
+        });
 }
 
 const displayCate = (data) => {
@@ -57,10 +61,13 @@ const allT = (id) => {
 //Get all tree
 const allPlants = () => {
     const allUrl = "https://openapi.programming-hero.com/api/plants";
-
+    showLoader();
     fetch(allUrl)
         .then(resAll => resAll.json())
-        .then(allData => displayAllPlants(allData.plants));
+        .then(allData => {
+            hideLoader()
+            displayAllPlants(allData.plants)
+        });
 }
 
 // displayAll Plants
@@ -69,6 +76,7 @@ const displayAllPlants = (plants) => {
     const parentTree = document.getElementById("treeInfo")
     // console.log(parentTree.innerText)
     parentTree.innerHTML = "";
+
 
     plants.forEach(element => {
         // console.log(element);
@@ -95,9 +103,13 @@ const displayAllPlants = (plants) => {
 
 const getCategoriesTree = (id) => {
     url = `https://openapi.programming-hero.com/api/category/${id}`
+    showLoader()
     fetch(url)
         .then(res => res.json())
-        .then(data => displayCateItem(data.plants));
+        .then(data => {
+            hideLoader()
+            displayCateItem(data.plants)
+        });
 }
 
 const displayCateItem = (catePlant) => {
@@ -199,4 +211,20 @@ const displayModalInfo = (catePlant) => {
 
 const getModal = (id) => {
     findModalInfo(id);
+}
+
+//Make loading function
+function showLoader() {
+    const parentTree = document.getElementById("treeInfo");
+    parentTree.innerHTML = `
+        <div class="col-span-3 text-center">
+        <span class="loading loading-dots loading-sm"></span>
+        <span class="loading loading-dots loading-md"></span>
+        </div>
+    `;
+}
+
+function hideLoader() {
+    const parentTree = document.getElementById("treeInfo");
+    parentTree.innerHTML = "";
 }
